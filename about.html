@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ABC FITNESS - About Us</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="assets/Client2_LogoPalette2_155EBC.png" alt="Main Logo" />
+          <span class="name">ABC FITNESS</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="classes.html">Classes</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="about.html" aria-current="page">About</a>
+          <button class="cart-button">
+            Cart <span class="cart-count">0</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <h2>Shopping Cart</h2>
+        <div id="cartItems"></div>
+        <div class="cart-total">
+          <p>Total: $<span id="cartTotal">0.00</span></p>
+        </div>
+        <div class="cart-buttons">
+          <button id="clearCartBtn">Clear Cart</button>
+          <button id="processOrderBtn">Process Order</button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero">
+        <div class="hero-image">
+          <img src="assets/Client2_IndividualKickboxing.png" alt="Woman Kickboxing">
+        </div>
+        <div class="hero-content">
+          <h1>About Us</h1>
+          <div class="hero-text">
+            <p>ABC Fitness Studio has been helping people improve their lives and health for over 10 years. We specialize in a whole-body approach.</p>
+          </div>
+          <div class="herot-buttons">
+            <a href="#" class="cta-button">Learn More</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="owners-section">
+        <h2>Meet The Owners</h2>
+        <p>A combined 50 years of experience</p>
+        <div class="owner-cards">
+          <a href="#" class="owner-card">
+            <div class="owner-avatar"></div>
+            <h3>Owner 1</h3>
+            <p>Mike</p>
+          </a>
+          <a href="#" class="owner-card">
+            <div class="owner-avatar"></div>
+            <h3>Owner 2</h3>
+            <p>Sarah</p>
+          </a>
+          <a href="#" class="owner-card">
+            <div class="owner-avatar"></div>
+            <h3>Owner 3</h3>
+            <p>Josh</p>
+          </a>
+        </div>
+      </section>
+      
+      <section class="certifications-section">
+        <h2>Our Certifications</h2>
+        <p>Certified in various fitness programs and nutrition</p>
+        <div class="certification-cards">
+          <a href="#" class="certification-card">
+            <div class="certification-logo"></div>
+            <h3>ACE</h3>
+            <p>American Council on Exercise</p>
+          </a>
+          <a href="#" class="certification-card">
+            <div class="certification-logo"></div>
+            <h3>NASM</h3>
+            <p>National Academy of Sports Medicine</p>
+          </a>
+          <a href="#" class="certification-card">
+            <div class="certification-logo"></div>
+            <h3>NSCA</h3>
+            <p>National Strength and Conditioning Association</p>
+          </a>
+          <a href="#" class="certification-card">
+            <div class="certification-logo"></div>
+            <h3>CSCS</h3>
+            <p>Certified Strength and Conditioning Specialist</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="get-started-hero">
+        <div class="et-started-hero-content">
+          <div class="cta-text">
+            <h2>Ready to get started?</h2>
+            <p>Start your free fitness trial today. This includes all classes and a meeting with a nutritionist.</p>
+            <p>_</p>
+          </div>
+          <div class="cta-button-container">
+            <a href="#" class="cta-button">Start Free Trial</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <h2>Contact Us</h2>
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="cta-button">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <h4>ABC FITNESS</h4>
+          <p>
+          Monday–Friday: 6 a.m. to 8 p.m.<br>
+          Saturday: 8 a.m. to 6 p.m.<br>
+          Sunday: Closed
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="classes.html">Classes</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About</a>
+            <a href="about.html#contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="subscribe-btn">Subscribe</button>
+          </form>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com" target="_blank">
+              <img src="assets/facebook_logo.png" alt="Facebook" class="social-icon">
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+              <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon">
+            </a>
+            <a href="https://www.youtube.com" target="_blank">
+              <img src="assets/youtube_logo.png" alt="YouTube" class="social-icon">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 ABC FITNESS. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
