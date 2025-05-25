@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
     <header>
@@ -39,70 +40,124 @@
       </div>
     </div>
 
+    <div id="cartIframeContainer" class="cart-iframe-container">
+      <iframe id="cartIframe" class="cart-iframe" src="cart.html" title="Shopping Cart"></iframe>
+      <div class="close-iframe" id="closeIframe">×</div>
+    </div>
+
     <main>
-      <section class="hero">
-        <div class="hero-image">
-          <img src="assets/Client2_IndividualKickboxing.png" alt="Woman Kickboxing">
-        </div>
-        <div class="hero-content">
+      <section class="hero-simple">
+        <img src="assets/classes.jpg" alt="Fitness Classes" class="hero-bg-image">
+        <div class="container">
           <h1>Fitness Classes</h1>
-          <div class="hero-text">
-            <p>Weight Training,Yoga, and Kickboxing. ABC Studios has classes for all fitness levels and interests.</p>
-          </div>
-          <div class="hero-buttons">
-            <a href="#" class="cta-button">Learn More</a>
-          </div>
+          <p>Weight Training, Yoga, and Kickboxing. ABC Studios has classes for all fitness levels and interests.</p>
+          <a href="#" class="cta-button">Explore Classes</a>
         </div>
       </section>
 
-      <section class="class-cards">
-        <a href="#link" class="class-card">
-          <div class="class-image">
-            <img src="assets/Client2_GroupYoga.png" alt="Yoga Class" />
-          </div>
-          <h3>Yoga</h3>
-          <p>Enhance flexibility and mental clarity through yoga.</p>
-        </a>
+      <section class="classes-section">
+        <div class="section-header">
+          <h2>Our Fitness Classes</h2>
+          <p>Discover a variety of classes designed to help you achieve your fitness goals</p>
+        </div>
         
-        <a href="#link" class="class-card">
-          <div class="class-image">
-            <img src="assets/Client2_GroupPilates.png" alt="Pilates Class" />
-          </div>
-          <h3>Pilates</h3>
-          <p>Strengthen your core with low-impact exercises.</p>
-        </a>
-        
-        <a href="#link" class="class-card">
-          <div class="class-image">
-            <img src="assets/Client2_GroupKickboxing.png" alt="Kickboxing Class" />
-          </div>
-          <h3>Kickboxing</h3>
-          <p>Boost energy with high-intensity moves.</p>
-        </a>
-        
-        <a href="#link" class="class-card">
-          <div class="class-image">
-            <img src="assets/weight_training.jpg" alt="Weight Training" />
-          </div>
-          <h3>Weight Training</h3>
-          <p>Build muscle and improve strength.</p>
-        </a>
-        
-        <a href="#" class="class-card">
-          <div class="class-image">
-            <img src="assets/cycling.jpeg" alt="Cycling Class" />
-          </div>
-          <h3>Cycling</h3>
-          <p>Boost endurance with group cycling.</p>
-        </a>
-        
-        <a href="#" class="class-card">
-          <div class="class-image">
-            <img src="assets/crossfit.jpg" alt="Crossfit Class" />
-          </div>
-          <h3>Crossfit</h3>
-          <p>Challenge your limits with dynamic exercises.</p>
-        </a>
+        <div class="class-cards-elegant">
+          <a href="#link" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/Client2_GroupYoga.png" alt="Yoga Class" />
+              <span class="class-category">Mind & Body</span>
+            </div>
+            <div class="class-content">
+              <h3>Yoga</h3>
+              <p>Enhance flexibility and mental clarity through yoga.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 60 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> All Levels</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+          
+          <a href="#link" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/Client2_GroupPilates.png" alt="Pilates Class" />
+              <span class="class-category">Core Strength</span>
+            </div>
+            <div class="class-content">
+              <h3>Pilates</h3>
+              <p>Strengthen your core with low-impact exercises.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 45 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> Beginner-Advanced</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+          
+          <a href="#link" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/Client2_GroupKickboxing.png" alt="Kickboxing Class" />
+              <span class="class-category">High Intensity</span>
+            </div>
+            <div class="class-content">
+              <h3>Kickboxing</h3>
+              <p>Boost energy with high-intensity moves.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 50 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> Intermediate</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+          
+          <a href="#link" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/weight_training.jpg" alt="Weight Training" />
+              <span class="class-category">Strength</span>
+            </div>
+            <div class="class-content">
+              <h3>Weight Training</h3>
+              <p>Build muscle and improve strength.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 55 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> All Levels</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+          
+          <a href="#" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/cycling.jpeg" alt="Cycling Class" />
+              <span class="class-category">Cardio</span>
+            </div>
+            <div class="class-content">
+              <h3>Cycling</h3>
+              <p>Boost endurance with group cycling.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 45 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> All Levels</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+          
+          <a href="#" class="class-card-elegant">
+            <div class="class-image-wrapper">
+              <img src="assets/crossfit.jpg" alt="Crossfit Class" />
+              <span class="class-category">Cross Training</span>
+            </div>
+            <div class="class-content">
+              <h3>Crossfit</h3>
+              <p>Challenge your limits with dynamic exercises.</p>
+              <div class="class-meta">
+                <span class="class-duration"><i class="fas fa-clock"></i> 60 min</span>
+                <span class="class-level"><i class="fas fa-signal"></i> Intermediate-Advanced</span>
+              </div>
+              <span class="class-link">Learn More <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>
       </section>
 
       <section class="program-overview">
@@ -129,6 +184,32 @@
         </div>
       </section>
     </main>
+
+    <section class="class-promotion">
+      <div class="promotion-container">
+        <h2>Special Class Packages</h2>
+        <div class="promotion-cards">
+          <div class="promotion-card">
+            <img src="assets/yoga.jpg" alt="Yoga Package">
+            <h3>Yoga Bundle</h3>
+            <p>10 classes for the price of 8</p>
+            <p class="price">$120</p>
+          </div>
+          <div class="promotion-card">
+            <img src="assets/kickboxing.jpg" alt="Kickboxing Package">
+            <h3>Kickboxing Package</h3>
+            <p>Monthly unlimited access</p>
+            <p class="price">$150</p>
+          </div>
+          <div class="promotion-card">
+            <img src="assets/full.jpeg" alt="Full Access Package">
+            <h3>Full Access Pass</h3>
+            <p>All classes for 3 months</p>
+            <p class="price">$299</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <div class="footer-content">

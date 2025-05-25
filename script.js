@@ -25,13 +25,21 @@ class CartManager {
     this.saveCart();
     this.updateDisplay();
     this.updateCartCount();
+    
+    // Update cart iframe if it exists
+    const cartIframe = document.getElementById('cartIframe');
+    if (cartIframe && cartIframe.contentWindow) {
+      cartIframe.contentWindow.postMessage('updateCart', '*');
+    }
   }
 
   clearCart() {
-    this.cart = [];
-    sessionStorage.removeItem(STORAGE_KEYS.CART);
+    this.cart.clear();
+    sessionStorage.clear();
     this.updateDisplay();
     this.updateCartCount();
+    this.saveCart();
+
   }
 
   calculateTotal() {
@@ -40,7 +48,7 @@ class CartManager {
 
   updateCartCount() {
     const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
+    if (cartCount.textContent !== undefined) {
       cartCount.textContent = this.cart.length;
     }
   }
@@ -68,19 +76,67 @@ class CartManager {
           price: parseFloat(button.dataset.price)
         };
         this.addItem(product);
+        
+        // Preload the iframe when an item is added to ensure it's ready
+        const cartIframe = document.getElementById('cartIframe');
+        if (cartIframe) {
+          // Force iframe reload to ensure it has the latest cart data
+          cartIframe.src = cartIframe.src;
+        }
+        
         alert('Item added to the cart');
       });
     });
 
-    // Cart button
+    // Cart button - Show iframe instead of modal
     const cartBtn = document.querySelector('.cart-button');
     cartBtn?.addEventListener('click', () => {
-      const modal = document.getElementById('cartModal');
-      this.cart = this.loadCart();
-      this.updateDisplay();
-      modal.style.display = 'block';
+      // Show iframe container
+      const iframeContainer = document.getElementById('cartIframeContainer');
+      iframeContainer.style.display = 'flex';
+      
+      // Notify iframe to update cart
+      const cartIframe = document.getElementById('cartIframe');
+      if (cartIframe.contentWindow) {
+        cartIframe.contentWindow.postMessage('updateCart', '*');
+      }
     });
 
+    // Close iframe button
+    const closeIframeBtn = document.getElementById('closeIframe');
+    closeIframeBtn?.addEventListener('click', () => {
+      document.getElementById('cartIframeContainer').style.display = 'none';
+    });
+
+    // Listen for messages from iframe
+    window.addEventListener('message', (event) => {
+      if (event.data === 'cartUpdated') {
+        // Update cart count when cart is updated from iframe
+        sessionStorage.removeItem(STORAGE_KEYS.CART);
+        this.cart = this.loadCart(); // Reload cart data from storage
+        this.updateCartCount();
+        
+        // Double-check that the cart count is updated correctly
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount && this.cart.length === 0) {
+          cartCount.textContent = '0';
+        }
+      } else if (event.data === 'closeCart') {
+        // Close iframe when order is processed
+        this.cart = this.loadCart(); // Reload cart data from storage
+        this.updateCartCount();
+        
+        // Double-check that the cart count is updated correctly
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount && this.cart.length === 0) {
+          cartCount.textContent = '0';
+        }
+        
+        document.getElementById('cartIframeContainer').style.display = 'none';
+      }
+    });
+
+    // For backward compatibility - keep modal functionality
     // Clear cart button
     const clearCartBtn = document.getElementById('clearCartBtn');
     clearCartBtn?.addEventListener('click', () => {
@@ -103,6 +159,20 @@ class CartManager {
       alert('Thank you for your order');
       this.clearCart();
       document.getElementById('cartModal').style.display = 'none';
+    });
+    
+    // View Cart button in gallery page
+    const viewCartBtn = document.getElementById('viewCartBtn');
+    viewCartBtn?.addEventListener('click', () => {
+      // Show iframe container
+      const iframeContainer = document.getElementById('cartIframeContainer');
+      iframeContainer.style.display = 'flex';
+      
+      // Notify iframe to update cart
+      const cartIframe = document.getElementById('cartIframe');
+      if (cartIframe.contentWindow) {
+        cartIframe.contentWindow.postMessage('updateCart', '*');
+      }
     });
   }
 }

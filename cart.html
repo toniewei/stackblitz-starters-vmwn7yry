@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Shopping Cart - ABC FITNESS</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Cart Styles */
+    body {
+      font-family: Calibri, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fff;
+      color: #001F3F;
+    }
+    
+    h2 {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #00231C;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #D3D3D3;
+      margin-bottom: 10px;
+    }
+    
+    .cart-item-image {
+      width: 60px;
+      height: 60px;
+      background-color: #f0f0f0;
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .cart-item-image img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    
+    .cart-item-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .cart-item-price {
+      color: #155EBC;
+    }
+    
+    .cart-total {
+      margin-top: 20px;
+      text-align: right;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .cart-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .cart-button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    #clearCartBtn {
+      background-color: #C5C3C3;
+      color: #00231C;
+    }
+    
+    #clearCartBtn:hover {
+      background-color: #b0b0b0;
+    }
+    
+    #processOrderBtn {
+      background-color: #00231C;
+      color: white;
+    }
+    
+    #processOrderBtn:hover {
+      background-color: #155EBC;
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h2>Shopping Cart</h2>
+  <div id="cartItems">
+    <!-- Cart items will be dynamically inserted here -->
+  </div>
+  <div class="cart-total">
+    <p>Total: $<span id="cartTotal">0.00</span></p>
+  </div>
+  <div class="cart-buttons">
+    <button id="clearCartBtn" class="cart-button">Clear Cart</button>
+    <button id="processOrderBtn" class="cart-button">Process Order</button>
+  </div>
+
+  <script>
+    // Get cart data from parent window
+    function loadCart() {
+      // Get the most up-to-date cart data directly from sessionStorage
+      return JSON.parse(window.sessionStorage.getItem('cartItems') || '[]');
+    }
+    
+    // Update the cart display
+    function updateCartDisplay() {
+      const cart = loadCart();
+      const cartItemsElement = document.getElementById('cartItems');
+      const cartTotalElement = document.getElementById('cartTotal');
+      
+      if (cart.length === 0) {
+        cartItemsElement.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+        cartTotalElement.textContent = '0.00';
+        return;
+      }
+      
+      // Generate HTML for cart items
+      let cartHTML = '';
+      let total = 0;
+      
+      cart.forEach(item => {
+        total += item.price;
+        
+        // Determine image source based on product name
+        let imgSrc = '';
+        if (item.name.includes('T-Shirt')) {
+          imgSrc = 'assets/Client2_TeeShirt.png';
+        } else if (item.name.includes('Water Bottle')) {
+          imgSrc = 'assets/Client2_WaterBottle.png';
+        } else if (item.name.includes('Yoga Mat')) {
+          imgSrc = 'assets/Client2_YogaMat.png';
+        }
+        
+        cartHTML += `
+          <div class="cart-item">
+            <div class="cart-item-image">
+              <img src="${imgSrc}" alt="${item.name}">
+            </div>
+            <div class="cart-item-details">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+            </div>
+          </div>
+        `;
+      });
+      
+      cartItemsElement.innerHTML = cartHTML;
+      cartTotalElement.textContent = total.toFixed(2);
+    }
+    
+    // Clear cart
+    function clearCart() {
+      // Remove cart items from session storage
+      window.sessionStorage.removeItem('cartItems');
+      // Update the display
+      updateCartDisplay();
+      // Ensure the parent window knows the cart is now empty
+      window.parent.postMessage('cartUpdated', '*');
+      
+      // Force the parent window to update its cart count
+      try {
+        if (window.parent && window.parent.document) {
+          const cartCountElement = window.parent.document.querySelector('.cart-count');
+          if (cartCountElement) {
+            cartCountElement.textContent = '0';
+          }
+        }
+      } catch (e) {
+        // Ignore cross-origin errors
+        console.log(e);
+        console.log('Could not directly update parent cart count due to security restrictions');
+      }
+    }
+    
+    // Process order
+    function processOrder() {
+      if (loadCart().length === 0) {
+        alert('Cart is empty');
+        return;
+      }
+      alert('Thank you for your order');
+      // Clear the cart
+      clearCart();
+      // Notify parent window to close iframe
+      window.parent.postMessage('closeCart', '*');
+      
+      // Additional attempt to ensure cart count is reset
+      try {
+        if (window.parent && window.parent.document) {
+          const cartCountElement = window.parent.document.querySelector('.cart-count');
+          if (cartCountElement) {
+            cartCountElement.textContent = '0';
+          }
+        }
+      } catch (e) {
+        // Ignore cross-origin errors
+        console.log('Could not directly update parent cart count due to security restrictions');
+      }
+    }
+    
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      // Update cart display immediately
+      updateCartDisplay();
+      
+      // Set up a small delay to check for cart updates again
+      // This helps ensure we have the latest data after page load
+      setTimeout(() => {
+        updateCartDisplay();
+      }, 100);
+      
+      // Clear cart button
+      const clearCartBtn = document.getElementById('clearCartBtn');
+      clearCartBtn.addEventListener('click', () => {
+        if (loadCart().length === 0) {
+          alert('No items to clear');
+          return;
+        }
+        clearCart();
+        alert('Cart cleared');
+      });
+      
+      // Process order button
+      const processOrderBtn = document.getElementById('processOrderBtn');
+      processOrderBtn.addEventListener('click', processOrder);
+      
+      // Listen for messages from parent window
+      window.addEventListener('message', (event) => {
+        if (event.data === 'updateCart') {
+          updateCartDisplay();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
