@@ -245,10 +245,48 @@ class ModalManager {
   }
 }
 
+// Mobile Navigation Class
+class MobileNavManager {
+  constructor() {
+    this.mobileMenuButton = document.querySelector('.mobile-menu-button');
+    this.navLinks = document.querySelector('.nav-links');
+    this.initializeEventListeners();
+  }
+
+  initializeEventListeners() {
+    if (this.mobileMenuButton) {
+      this.mobileMenuButton.addEventListener('click', () => {
+        this.mobileMenuButton.classList.toggle('active');
+        this.navLinks.classList.toggle('active');
+      });
+
+      // Close mobile menu when a link is clicked
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          this.mobileMenuButton.classList.remove('active');
+          this.navLinks.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!this.mobileMenuButton.contains(event.target) && 
+            !this.navLinks.contains(event.target) && 
+            this.navLinks.classList.contains('active')) {
+          this.mobileMenuButton.classList.remove('active');
+          this.navLinks.classList.remove('active');
+        }
+      });
+    }
+  }
+}
+
 // Initialize all managers
 document.addEventListener('DOMContentLoaded', () => {
   new CartManager();
   new NewsletterManager();
   new ContactFormManager();
   new ModalManager();
+  new MobileNavManager();
 });
